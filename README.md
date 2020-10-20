@@ -3,4 +3,4 @@ Contains a generic wide beam CT scanner Monte Carlo Source model for FLUKA along
 
 Open the Document FLUKA_CT for a detailed explanation of all the files in the project.
 
-Email: chezhipower@gmail.com for latest updates
+Email: elanchezhian.somasundaram@cchmc.org for latest updates
