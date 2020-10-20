@@ -1,0 +1,34 @@
+Sender: LSF System <srv-lsf@bmi-460g7-05>
+Subject: Job 959167: <Fluka_Scripts> Exited
+
+Job <Fluka_Scripts> was submitted from host <bmiclusterp3> by user <somd7w> in cluster <BMICluster>.
+Job was executed on host(s) <bmi-460g7-05>, in queue <normal>, as user <somd7w> in cluster <BMICluster>.
+</tmp/.lsbtmp41699> was used as the home directory.
+</users/somd7w/FLUKA-CT/RunFluka/Fluka_Scripts/run1> was used as the working directory.
+Started at Wed Nov  6 11:00:30 2019
+Results reported at Wed Nov  6 11:00:32 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+/usr/local/fluka/2011/flutil/rfluka -e /users/somd7w/FLUKA-CT/RunFluka/myfluka/ -N0 -M1 1.inp
+------------------------------------------------------------
+
+Exited with exit code 2.
+
+Resource usage summary:
+
+    CPU time   :      0.23 sec.
+    Max Memory :         8 MB
+    Max Swap   :       481 MB
+
+    Max Processes  :         4
+    Max Threads    :         4
+
+The output (if any) follows:
+
+$TARGET_MACHINE = Linux
+$FLUPRO = /usr/local/fluka/2011
+
+Input /users/somd7w/FLUKA-CT/RunFluka/Fluka_Scripts/run1/1.inp not found !

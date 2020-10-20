@@ -1,0 +1,44 @@
+clear all;
+
+% Load Spectra
+[fileName, pathName] = uigetfile({'*.mat'}, 'Load Input Spectra');
+load([pathName '/' fileName]);
+
+%% Load Scan Parameters
+SFOV = inputdlg('What is the Field Of View (LAT) of the Beam in mm ?', 'SFOV', 1,{'320'});
+SFOV = str2num(cell2mat(SFOV)); %mm
+
+col = inputdlg('What is the collimation (Length) of the Beam? in mm', 'Collimation', 1,{'430'});
+Eff_Col = str2num(cell2mat(col));
+
+mAs = inputdlg('What is the Average Tube Current in mAs ', 'Tube Current (mAs)', 1,{'10'});  % Large Filter, 120Kvp, TCM NI=4.0
+mAs = str2num(cell2mat(mAs));
+
+ssd = inputdlg('What is the Source to Patient SSD distance ', 'Tube Current (mAs)', 1,{'1000'});  % Large Filter, 120Kvp, TCM NI=4.0
+ssd = str2num(cell2mat(ssd));
+
+%% Load Fluence MAT file
+[fileName, pathName] = uigetfile({'*.mat'}, 'Load Fluence and Error MAT file');
+load([pathName '/' fileName]);
+
+%% Conversion factor from GeV/G to mGy
+CF1 = 1.60218E-04;
+
+%% Compute Absolute Dose
+%Energy Fluence * Mass Attn Coeff *CF1 *CF2
+Erg_Exposure_R = Fluence*CF1;
+Error_Exposure_R = Error.* Erg_Exposure_R/100;
+
+% Get the Source Strength
+% src_strength =  Photons/mm^2/mAs * mAs  * mm^2
+
+src_strength =  sum(spec(:)) * mAs * SFOV * Eff_Col *1000^2/ssd^2;
+
+
+Final_Dose = Erg_Exposure_R * src_strength;
+Final_Error = Error_Exposure_R * src_strength;
+Dosenames = {'Left Ovary','Right Ovary','Left Testis','Right Testis'};
+for i = 1:length(Final_Dose)
+    Final = [Dosenames(i) 'dose (mGy) is ' num2str(Final_Dose(i)) ' +/- ' num2str(Final_Error(i))];
+    disp(Final);
+end
